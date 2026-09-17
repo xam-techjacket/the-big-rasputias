@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>the rasputias2</title>
+    <style>
+        /* Diseño Neutro y Discreto */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e9ecef;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #ced4da;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        h1, h2 {
+            font-size: 1.2rem;
+            color: #495057;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid #dee2e6;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        .slogan {
+            font-size: 0.95rem;
+            font-style: italic;
+            color: #6c757d;
+            margin-top: -5px;
+            margin-bottom: 15px;
+        }
+        
+        /* Sección de Instrucciones y QR */
+        .info-section {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 25px;
+            border: 1px solid #e2e6ea;
+            text-align: center;
+        }
+        .info-section p {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin: 8px 0;
+        }
+        .highlight {
+            font-weight: bold;
+            color: #343a40;
+        }
+        .qr-box {
+            margin: 15px 0;
+        }
+        .qr-box img {
+            width: 120px;
+            height: 120px;
+            border: 5px solid #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Catálogo de Productos */
+        .product {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #f1f3f5;
+            padding: 15px 0;
+        }
+        .product-img {
+            width: 70px;
+            height: 70px;
+            background-color: #dee2e6;
+            border-radius: 4px;
+            margin-right: 15px;
+            object-fit: cover;
+            font-size: 10px;
+            color: #adb5bd;
+            text-align: center;
+            line-height: 70px;
+        }
+        .product-info {
+            flex-grow: 1;
+        }
+        .product-title {
+            font-weight: bold;
+            margin: 0 0 5px 0;
+            color: #343a40;
+        }
+        .product-desc {
+            font-size: 0.8rem;
+            color: #6c757d;
+            margin: 0 0 8px 0;
+            line-height: 1.3;
+        }
+        .product-stock {
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #495057;
+        }
+        .btn {
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            transition: background 0.2s;
+        }
+        .btn:hover {
+            background-color: #495057;
+        }
+        .btn:disabled {
+            background-color: #ced4da;
+            cursor: not-allowed;
+        }
+
+        /* Sección de Carrito */
+        .cart-section {
+            margin-top: 30px;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px dashed #ced4da;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            color: #495057;
+            font-weight: bold;
+        }
+        .checkout-btn {
+            width: 100%;
+            background-color: #343a40;
+            margin-top: 15px;
+            padding: 12px;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+        .checkout-btn:hover {
+            background-color: #212529;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 30px;
+            font-size: 0.75rem;
+            color: #adb5bd;
+            text-align: center;
+            border-top: 1px solid #e9ecef;
+            padding-top: 15px;
+        }
+        .footer a {
+            color: #adb5bd;
+            text-decoration: none;
+        }
+
+        /* Modal de confirmación */
+        #confirmation-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            max-width: 320px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- Sección de Instrucciones -->
+        <div class="info-section">
+            <h2>the rasputias2</h2>
+            <p class="slogan">"gordas como ninguna otra"</p>
+            
+            <p>Ubicación actual: <span class="highlight">Grupo 07, primer semestre</span>.</p>
+            <p>🤫 <strong>Protocolo:</strong> Pasa de manera discreta y menciona que vienes por unas <span class="highlight">"rasputias"</span>.</p>
+            
+            <div class="qr-box">
+                <!-- Código QR configurado con tu número -->
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wa.me/525561882499?text=Hola,%20paso%20por%20unas%20rasputias.%20%C2%BFQu%C3%A9%20tienes%20disponible%20hoy?" alt="QR de Contacto Rápido">
+            </div>
+            <p style="font-size: 0.75rem;">Escanea para contacto rápido o usa el inventario abajo.</p>
+        </div>
+
+        <!-- Inventario -->
+        <h1>Inventario Disponible</h1>
+        <div id="product-list">
+            <!-- Los productos se inyectarán aquí -->
+        </div>
+
+        <!-- Carrito -->
+        <div class="cart-section">
+            <h2>Bandeja de Selección</h2>
+            <div id="cart-items">
+                <p style="font-size:0.8rem; color:#adb5bd; text-align:center;">No hay elementos seleccionados.</p>
+            </div>
+            <button id="checkout-btn" class="btn checkout-btn" style="display:none;" onclick="processCheckout()">Confirmar Solicitud</button>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Depto. de Atención y Quejas: <a href="https://wa.me/525561882499" target="_blank">5561882499</a></p>
+        </div>
+    </div>
+
+    <!-- Modal de confirmación -->
+    <div id="confirmation-modal">
+        <div class="modal-content">
+            <h3 style="color:#343a40;">Solicitud procesada</h3>
+            <p style="color:#6c757d; font-size:0.9rem; margin-bottom: 20px;">gracias por haberme enviado nensaje, en unos momentos te tendere y opodre darte tus gomitas.</p>
+            <button class="btn" onclick="closeModal()" style="width: 100%;">Entendido</button>
+        </div>
+    </div>
+
+    <script>
+        const NUMERO_VENTAS = "5561882499"; 
+        const baseDescription = "Todos llevan miguelito, chamoy y polvo de tamborín.";
+        
+        let products = [
+            {
+                id: 'pinguinos',
+                name: 'Pingüinos',
+                desc: `Lucky Gummies (8-10 pzas aprox). Interior: picafresa o tamborín. ${baseDescription}`,
+                stock: 15,
+                img: 'imagen_de_pinguinos2.jpg' 
+            },
+            {
+                id: 'tiburones',
+                name: 'Tiburones',
+                desc: `Lucky Gummies (8-10 pzas aprox). Interior: picafresa o tamborín. ${baseDescription}`,
+                stock: 15,
+                img: 'imagen_de_pinguinos2.jpg'
+            },
+            {
+                id: 'gusanos',
+                name: 'Lombrices',
+                desc: `Lucky Gummies (8-10 pzas aprox). Interior: picafresa o tamborín. ${baseDescription}`,
+                stock: 15,
+                img: 'imagen_de_pinguinos2.jpg'
+            },
+            {
+                id: 'aros_durazno',
+                name: 'Aros de Durazno',
+                desc: `Lucky Gummies (8-10 pzas aprox). Interior: picafresa o tamborín. ${baseDescription}`,
+                stock: 15,
+                img: 'imagen_de_pinguinos2.jpg'
+            },
+            {
+                id: 'aros_manzana',
+                name: 'Aros de Manzana',
+                desc: `Lucky Gummies (8-10 pzas aprox). Interior: picafresa o tamborín. ${baseDescription}`,
+                stock: 15,
+                img: 'imagen_de_pinguinos2.jpg'
+            }
+        ];
+
+        let cart = {};
+
+        function renderProducts() {
+            const productList = document.getElementById('product-list');
+            productList.innerHTML = '';
+
+            products.forEach(p => {
+                const isOutOfStock = p.stock <= 0;
+                
+                const productDiv = document.createElement('div');
+                productDiv.className = 'product';
+                productDiv.innerHTML = `
+                    <img src="${p.img}" class="product-img" alt="${p.name}" onerror="this.src='https://via.placeholder.com/70?text=IMG'">
+                    <div class="product-info">
+                        <p class="product-title">${p.name}</p>
+                        <p class="product-desc">${p.desc}</p>
+                        <p class="product-stock" style="color: ${isOutOfStock ? '#dc3545' : '#6c757d'}">
+                            ${isOutOfStock ? 'Agotado' : 'Stock: ' + p.stock + ' unidades'}
+                        </p>
+                    </div>
+                    <button class="btn" ${isOutOfStock ? '' : `onclick="addToCart('${p.id}')"`} 
+                            style="${isOutOfStock ? 'background-color:#ced4da; color:#6c757d;' : ''}">
+                        ${isOutOfStock ? 'Sin stock' : 'Agregar'}
+                    </button>
+                `;
+
+                if (isOutOfStock) {
+                    productDiv.querySelector('button').onclick = () => handleOutOfStock();
+                }
+
+                productList.appendChild(productDiv);
+            });
+        }
+
+        function handleOutOfStock() {
+            alert("Suerte para la próxima, debes de ser más rapid@.");
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            if (product && product.stock > 0) {
+                product.stock--; 
+                
+                if (cart[id]) {
+                    cart[id].qty++;
+                } else {
+                    cart[id] = { name: product.name, qty: 1 };
+                }
+                
+                renderProducts();
+                renderCart();
+            }
+        }
+
+        function renderCart() {
+            const cartContainer = document.getElementById('cart-items');
+            const checkoutBtn = document.getElementById('checkout-btn');
+            cartContainer.innerHTML = '';
+            
+            let totalItems = 0;
+            
+            for (let id in cart) {
+                totalItems++;
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'cart-item';
+                itemDiv.innerHTML = `<span>${cart[id].qty}x ${cart[id].name}</span>`;
+                cartContainer.appendChild(itemDiv);
+            }
+
+            if (totalItems > 0) {
+                checkoutBtn.style.display = 'block';
+            } else {
+                cartContainer.innerHTML = '<p style="font-size:0.8rem; color:#adb5bd; text-align:center;">No hay elementos seleccionados.</p>';
+                checkoutBtn.style.display = 'none';
+            }
+        }
+
+        function processCheckout() {
+            let orderText = "";
+            for (let id in cart) {
+                orderText += `${cart[id].qty} de ${cart[id].name}, `;
+            }
+            orderText = orderText.slice(0, -2); 
+
+            const message = `Hola, quiero pedir: ${orderText}. ¿A qué hora, en qué lugar nos vemos y con qué billete te pago? Paso por unas "rasputias".`;
+            const whatsappUrl = `https://wa.me/52${NUMERO_VENTAS}?text=${encodeURIComponent(message)}`;
+
+            document.getElementById('confirmation-modal').style.display = 'flex';
+
+            setTimeout(() => {
+                window.open(whatsappUrl, '_blank');
+            }, 1500);
+        }
+
+        function closeModal() {
+            document.getElementById('confirmation-modal').style.display = 'none';
+            cart = {};
+            renderCart();
+        }
+
+        renderProducts();
+    </script>
+
+</body>
+</html>
