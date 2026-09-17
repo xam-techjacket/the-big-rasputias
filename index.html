@@ -364,7 +364,7 @@
             }
             orderText = orderText.slice(0, -2); 
 
-            const message = `Hola, quiero pedir: ${orderText}. ¿A qué hora, en qué lugar nos vemos y con qué billete te pago? Paso por unas "rasputias".`;
+            const message = `Hola, quiero pedir: ${orderText}.  tu, como usuario, porfavor rellena el siguiente formulario: ¿A qué hora, en qué lugar nos vemos y con qué billete te pago? Paso por unas "rasputias".`;
             const whatsappUrl = `https://wa.me/52${NUMERO_VENTAS}?text=${encodeURIComponent(message)}`;
 
             document.getElementById('confirmation-modal').style.display = 'flex';
